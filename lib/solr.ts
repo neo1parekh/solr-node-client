@@ -172,7 +172,6 @@ export class Client {
     acceptContentType: string
   ): Promise<T> {
     const protocol = this.options.secure ? 'https' : 'http';
-    const url = `${protocol}://${this.options.host}:${this.options.port}${path}`;
     const requestOptions: UndiciRequestOptions = {
       ...this.options.request,
       method,
@@ -198,7 +197,7 @@ export class Client {
 
     // Perform the request and handle results.
     const response = await this.undiciClient.request({
-      path: url,
+      path,
       ...requestOptions,
     });
 
